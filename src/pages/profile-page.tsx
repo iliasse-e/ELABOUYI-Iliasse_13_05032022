@@ -1,42 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { editProfileAction } from "../actions";
+import { Account } from "../components/profile/account";
+import { UpdateProfile } from "../components/profile/modify-profile";
+import { userStateType } from "../reducers/user";
+
+const amounts:Number[] = [2082.79, 10928.42, 184.30];
+const titles: String[] = ["Argent Bank Checking (x8349)", "Argent Bank Savings (x6712)", "Argent Bank Credit Card (x8349)"];
+const descriptions: String[] = ["Available Balance","Current Balance"];
 
 export const ProfilePage = () : JSX.Element => {
+  
+  const user: userStateType = useSelector((state: RootStateOrAny) => state.user);
+  const editProfile: userStateType = useSelector((state: RootStateOrAny) => state.editProfile);
+  const dispatch = useDispatch()
 
-    return  <main className="main bg-dark">
+  const [updateUser, setUpdateUser] = useState(false);
+  const currentFirstName = user.firstName;
+  const currentlastName = user.lastName;
+
+  return  <main className="main bg-dark">
     <div className="header">
-      <h1>Welcome back<br />Tony Jarvis!</h1>
-      <button className="edit-button">Edit Name</button>
+
+      {editProfile ? (<UpdateProfile user={user} />) : 
+        (<>
+          <h1>Welcome back<br />{currentFirstName + " " + currentlastName} !</h1>
+          <button className="edit-button" onClick={(e) => dispatch(editProfileAction())}>Edit Name</button>
+        </>) 
+      }
+
     </div>
     <h2 className="sr-only">Accounts</h2>
-    <section className="account">
-      <div className="account-content-wrapper">
-        <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-        <p className="account-amount">$2,082.79</p>
-        <p className="account-amount-description">Available Balance</p>
-      </div>
-      <div className="account-content-wrapper cta">
-        <button className="transaction-button">View transactions</button>
-      </div>
-    </section>
-    <section className="account">
-      <div className="account-content-wrapper">
-        <h3 className="account-title">Argent Bank Savings (x6712)</h3>
-        <p className="account-amount">$10,928.42</p>
-        <p className="account-amount-description">Available Balance</p>
-      </div>
-      <div className="account-content-wrapper cta">
-        <button className="transaction-button">View transactions</button>
-      </div>
-    </section>
-    <section className="account">
-      <div className="account-content-wrapper">
-        <h3 className="account-title">Argent Bank Credit Card (x8349)</h3>
-        <p className="account-amount">$184.30</p>
-        <p className="account-amount-description">Current Balance</p>
-      </div>
-      <div className="account-content-wrapper cta">
-        <button className="transaction-button">View transactions</button>
-      </div>
-    </section>
+    <Account title={titles[0]} amount={amounts[0]} description={descriptions[0]} />
+    <Account title={titles[1]} amount={amounts[1]} description={descriptions[0]} />
+    <Account title={titles[2]} amount={amounts[2]} description={descriptions[2]} />
   </main>
 }

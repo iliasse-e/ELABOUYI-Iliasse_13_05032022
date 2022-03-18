@@ -1,18 +1,23 @@
 import React, { FormEvent, FormEventHandler, useState } from "react";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { connectAction } from "../../actions";
-import { loginPost, LoginResponse } from "../../service/postLogin";
+import { connectAction, getUserAction } from "../../actions";
+import { loginPost, LoginResponse } from "../../service/api-login";
+import { tokenPost } from "../../service/api-user-profile";
 
-export const SignInForm = (isLogged: any):JSX.Element => {
+interface isLoggedType {
+  isLogged: Boolean
+}
 
-  const isLoggedIn: Boolean = useSelector((state: RootStateOrAny) => state)
-  console.log(isLogged)
+export const SignInForm = (isLogged: isLoggedType):JSX.Element => {
 
+  console.log(isLogged.isLogged)
+
+    const [isLoading, setLoader] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
-    const [connected, setConnected] = useState(false);
+    const [connected, setConnected] = useState(isLogged.isLogged);
     const dispatch = useDispatch();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -21,11 +26,14 @@ export const SignInForm = (isLogged: any):JSX.Element => {
         const response: LoginResponse = await loginPost(email, password);
         const accessToken: String = response?.data?.body?.token;
         const accessMessage: String = response?.data?.message;
-
+        // token post request
+        const getUser:any = await tokenPost(accessToken);
         console.log(email, password, response, accessMessage, accessToken);
 
         setConnected(true);
+        // redux store update
         dispatch(connectAction(accessMessage, accessToken));
+        dispatch(getUserAction(getUser.data.body));
         
       }
       catch (error) {
@@ -38,7 +46,7 @@ export const SignInForm = (isLogged: any):JSX.Element => {
       }
     }
 
-    return !isLogged ? (<form onSubmit={handleSubmit}>
+    return connected ? (<Navigate to="/profile"/>) : (<form onSubmit={handleSubmit}>
     <div className="input-wrapper">
       <label htmlFor="username">Username</label>
       <input 
@@ -63,14 +71,6 @@ export const SignInForm = (isLogged: any):JSX.Element => {
     </div>
 
     <button className="sign-in-button">Sign In</button>
-    {
-    /*<!-- PLACEHOLDER DUE TO STATIC SITE -->
-    <a href="./user.html" className="sign-in-button">Sign In</a>
-    <!-- SHOULD BE THE BUTTON BELOW -->
-    <!-- <button className="sign-in-button">Sign In</button> -->
-    <!--  --> 
-    We'll use a <Redirect />component
-    */
-    }
-  </form>) : (<Navigate to="/user"/>)
+    
+  </form>)
 }

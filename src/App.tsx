@@ -14,20 +14,25 @@ import { Footer } from './components/footer';
 import { ProfilePage } from './pages/profile-page';
 
 const App = () : JSX.Element => {
-  const isLoggedIn: Boolean = useSelector((state: RootStateOrAny) => state.isLogged)
+  
+  const isLoggedIn: Boolean = useSelector((state: RootStateOrAny) => state.auth.isLogged)
+  const url = process.env.REACT_APP_URL
+
   return (
     <Router>
       <div className='App'>
         <Navigation isLogged={isLoggedIn} />
+
         <Routes>
           
           <Route path="/" element={<HomePage />} />
 
-          <Route path="/user" element={<ProfilePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
 
-          <Route path='/login' element={<SignInPage />} />
+          <Route path="/login" element={<SignInPage isLogged={isLoggedIn} />} />
 
         </Routes>
+
         <Footer />
       </div> 
     </Router>

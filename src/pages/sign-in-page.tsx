@@ -3,15 +3,19 @@ import { RootStateOrAny, useSelector } from "react-redux";
 import { Footer } from "../components/footer";
 import { SignInForm } from "../components/login/sign-in-form";
 import { Navigation } from "../components/navigation";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser, faSignOut } from '@fortawesome/free-solid-svg-icons'
 
-export const SignInPage = (): JSX.Element => {
-    const isLoggedIn: Boolean = useSelector((state: RootStateOrAny) => state.isLogged)
+export const SignInPage = (isLogged: any): JSX.Element => {
+
+    const isLoggedIn: Boolean = useSelector((state: RootStateOrAny) => state.auth.isLogged)
+
     return <>
         <main className="main bg-dark">
             <section className="sign-in-content">
-                <i className="fa fa-user-circle sign-in-icon"></i>
+                <FontAwesomeIcon className="sign-in-icon" icon={faCircleUser} />
                 <h1>Sign In</h1>
-                <SignInForm isLogged={isLoggedIn} />
+                <SignInForm isLogged={isLogged.isLogged} />
             </section>
         </main>
     </> 

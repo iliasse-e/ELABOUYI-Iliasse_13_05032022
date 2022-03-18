@@ -3,6 +3,10 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 
+export const EDIT_PROFILE = "EDIT_PROFILE";
+export const CANCEL_EDIT_PROFILE = "CANCEL_EDIT_PROFILE"
+
+export const SET_PROFILE = "SET_PROFILE";
 export const SET_FIRSTNAME = "SET_FIRSTNAME";
 export const SET_LASTNAME = "SET_LASTNAME";
 
