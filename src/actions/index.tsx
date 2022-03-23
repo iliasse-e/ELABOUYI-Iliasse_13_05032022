@@ -1,7 +1,7 @@
 import { userStateType } from "../reducers/user"
-import { CANCEL_EDIT_PROFILE, EDIT_PROFILE, IS_LOGGED, LOGIN_SUCCESS, LOGOUT, SET_PROFILE, TOKEN_AVAILABLE, TOKEN_VALID } from "./types"
+import { IS_LOGGED, LOGIN_SUCCESS, LOGOUT, SET_PROFILE } from "./types"
 
-export const connectAction = (message: String, token: String) => {
+export const connectAction = (message: string, token: string) => {
     return {
         type: LOGIN_SUCCESS,
         message: message,
@@ -24,21 +24,15 @@ export const getUserAction = (user: userStateType) => {
     }
 }
 
-export const updateProfileAction = (updatedUser : {firstName: String, lastName: String, email : String, password: String}) => {
+/**
+ * Updates redux store user profile
+ * Has to be used inside dispatch
+ * @param updatedUser 
+ * @returns new user profile
+ */
+export const updateProfileAction = (updatedUser : {firstName: string, lastName: string, email : string, id: string}) => {
     return {
         type: SET_PROFILE,
         updatedUser: updatedUser
-    }
-}
-
-export const editProfileAction = () => {
-    return {
-        type: EDIT_PROFILE,
-    }
-}
-
-export const cancelEditProfileAction = () => {
-    return {
-        type: CANCEL_EDIT_PROFILE,
     }
 }

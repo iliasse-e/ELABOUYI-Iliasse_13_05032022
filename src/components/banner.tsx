@@ -5,7 +5,7 @@ import React from "react"
  * Called in ** component/page
  * @returns banner hero content
  */
-export const Banner = ():JSX.Element => {
+export const Banner = (): JSX.Element => {
     return <div className="hero">
     <section className="hero-content">
       <h2 className="sr-only">Promoted Content</h2>

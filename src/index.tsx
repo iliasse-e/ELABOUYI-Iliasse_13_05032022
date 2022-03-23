@@ -6,17 +6,24 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { rootReducers } from './reducers/';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import configureStore from './store/index'
 
-const store = createStore(
+const {store, persistor} = configureStore();
+
+/*const store = createStore(
   rootReducers,
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-);
+);*/
+
 ReactDOM.render(
-    <Provider store={store}>
-  <React.StrictMode>
-      <App />
-  </React.StrictMode>
-    </Provider>,
+      <React.StrictMode>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+              <App />
+          </PersistGate>
+        </Provider>
+      </React.StrictMode>,
   document.getElementById('root')
 );
 

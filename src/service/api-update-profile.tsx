@@ -1,19 +1,18 @@
 /**
- * @file Handles the API user profile call (PUT method)
+ * @file Handles the API user profile modification
  */
  import axios from "axios";
- import React from "react";
  
 interface ProfileType {
-    firstName: String,
-    lastName: String,
+    firstName: string,
+    lastName: string,
 };
 
 const url = process.env.REACT_APP_SERVER_URL;
 const userEndpoint = url + process.env.REACT_APP_API_PROFILE;
 
 
-export const updatePost = (firstName: String, lastName: String, token: String): Promise<ProfileType> => {
+export const updatePost = (firstName: string, lastName: string, token: string): Promise<ProfileType> => {
     return axios.put(
         userEndpoint,
         {

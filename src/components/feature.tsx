@@ -7,8 +7,9 @@ import security from "../assets/img/icon-security.png"
  * Builds the feature component
  * @returns 
  */
-export const Feature = () => {
-    return  <section className="features">
+export const Feature = (): JSX.Element => {
+
+    return <section className="features">
     <h2 className="sr-only">Features</h2>
     <div className="feature-item">
       <img src={chat} alt="Chat Icon" className="feature-icon" />

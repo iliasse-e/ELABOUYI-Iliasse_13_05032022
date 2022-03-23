@@ -1,21 +1,20 @@
 /**
- * @file Handles the API user profile call (POST method)
+ * @file Handles the API user profile call
  */
 import axios from "axios";
-import React from "react";
 
 const url = process.env.REACT_APP_SERVER_URL;
 const userEndpoint = url + process.env.REACT_APP_API_PROFILE;
 
 interface UserType {
-    firstName: String,
-    lastName: String,
-    email: String,
-    id: String
+    firstName: string,
+    lastName: string,
+    email: string,
+    id: string
 };
 
 
-export const tokenPost = (token: String): Promise<UserType> => {
+export const tokenPost = (token: string): Promise<UserType> => {
     return axios.post(
         userEndpoint,
         token,

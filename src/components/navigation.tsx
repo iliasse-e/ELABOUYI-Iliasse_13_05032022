@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faSignOut } from '@fortawesome/free-solid-svg-icons'
 
 interface isLoggedType {
-  isLogged: Boolean
+  isLogged: boolean
 }
 
 /**

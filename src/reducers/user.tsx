@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { RootStateOrAny } from "react-redux";
-import { IS_LOGGED, SET_PROFILE } from "../actions/types";
+import { IS_LOGGED, LOGOUT, SET_PROFILE } from "../actions/types";
 
 export interface userStateType {
-    firstName: null | String,
-    lastName: null | String,
-    email: null | String,
-    id: null | String
+    firstName: null | string,
+    lastName: null | string,
+    email: null | string,
+    id: null | string
 }
 
 const defaultState = {
@@ -33,6 +31,8 @@ export const userReducer = (state: userStateType = defaultState, action: any) =>
                 email: action.updatedUser.email,
                 id: action.updatedUser.id
         };
+        case LOGOUT :
+            return defaultState
         default :
             return state
             

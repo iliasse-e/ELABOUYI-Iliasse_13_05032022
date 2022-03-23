@@ -1,18 +1,5 @@
 import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "../actions/types";
 
-export const loggedReducer = (state = false, action: any) => {
-    switch(action.type){
-        case LOGIN_SUCCESS:
-            return true;
-        case LOGIN_FAIL :
-            return false;
-        case LOGOUT :
-            return false;
-        default :
-        return state
-    }
-}
-
 interface authStateType {
     isLogged: Boolean,
     token: String | null,
@@ -23,7 +10,7 @@ const defaultState = {
     isLogged: false,
     token: null,
     message: "Not connected"
- }
+}
 
 /**
  * Manages the authentification reducer state (user is logged ?, token, and connexion message)
