@@ -1,3 +1,7 @@
+/**
+ * @file Gathers all redux actions
+ */
+
 import { userStateType } from "../reducers/user"
 import { IS_LOGGED, LOGIN_SUCCESS, LOGOUT, SET_PROFILE } from "./types"
 
@@ -17,6 +21,11 @@ export const disconnectAction = () => {
     }
 }
 
+/**
+ * Sets a user into redux store
+ * @param user 
+ * @returns user profile
+ */
 export const getUserAction = (user: userStateType) => {
     return {
         type: IS_LOGGED,
@@ -28,7 +37,7 @@ export const getUserAction = (user: userStateType) => {
  * Updates redux store user profile
  * Has to be used inside dispatch
  * @param updatedUser 
- * @returns new user profile
+ * @returns updated user profile
  */
 export const updateProfileAction = (updatedUser : {firstName: string, lastName: string, email : string, id: string}) => {
     return {

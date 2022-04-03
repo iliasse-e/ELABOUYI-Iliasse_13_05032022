@@ -11,10 +11,18 @@ interface ProfileType {
 const url = process.env.REACT_APP_SERVER_URL;
 const userEndpoint = url + process.env.REACT_APP_API_PROFILE;
 
-
-export const updatePost = (firstName: string, lastName: string, token: string): Promise<ProfileType> => {
+/**
+ * Make the Http request to update user profile (firstname & lastname)
+ * Token needed for authentification
+ * @param firstName 
+ * @param lastName 
+ * @param token 
+ * @param endpoint 
+ * @returns Promise (object of new firstname and lastname)
+ */
+export const updatePost = (firstName: string, lastName: string, token: string, endpoint: string = userEndpoint): Promise<ProfileType> => {
     return axios.put(
-        userEndpoint,
+        endpoint,
         {
         firstName: firstName,
         lastName: lastName

@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { HomePage } from './pages/home-page';
 import {
@@ -15,7 +13,7 @@ import { ProfilePage } from './pages/profile-page';
 
 const App = () : JSX.Element => {
   
-  const isLoggedIn: boolean = useSelector((state: RootStateOrAny) => state.auth.isLogged)
+  const isLoggedIn: boolean = useSelector((state: RootStateOrAny) => state.auth.isLogged) //redux State
 
   return (
     <Router>

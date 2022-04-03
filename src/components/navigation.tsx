@@ -12,7 +12,7 @@ interface isLoggedType {
 
 /**
  * Navigation component
- * Called in ** component/page
+ * Called in App
  * @returns navigation bar
  */
 export const Navigation: React.FC<isLoggedType> = (isLogged) : JSX.Element => {

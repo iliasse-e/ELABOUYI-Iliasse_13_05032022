@@ -1,11 +1,18 @@
-import { RootStateOrAny, useSelector } from "react-redux";
 import { SignInForm } from "../components/login/sign-in-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 
-export const SignInPage = (isLogged: any): JSX.Element => {
+interface isLoggedType {
+    isLogged: boolean
+}
 
-    const isLoggedIn: boolean = useSelector((state: RootStateOrAny) => state.auth.isLogged)
+/**
+ * Sets and displays the logIn page
+ * Called in App
+ * @param isLogged boolean state from store
+ * @returns login page
+ */
+export const SignInPage = (isLogged: isLoggedType): JSX.Element => {
 
     return <>
         <main className="main bg-dark">
@@ -15,5 +22,5 @@ export const SignInPage = (isLogged: any): JSX.Element => {
                 <SignInForm isLogged={isLogged.isLogged} />
             </section>
         </main>
-    </> 
+    </>
 }

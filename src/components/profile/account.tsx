@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface PropType {
-    title: String,
-    amount: Number,
-    description: String,
+    title: string,
+    amount: number,
+    description: string,
 };
 
+/**
+ * section component of accounts profile page
+ * display one data each
+ * called in profile page
+ * @param param0 data of one transaction
+ * @returns account section
+ */
 export const Account: React.FC<PropType> = ({title, amount, description}) : JSX.Element => {
 
     return <section className="account">

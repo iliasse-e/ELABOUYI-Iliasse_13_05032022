@@ -6,9 +6,16 @@ import { updatePost } from "../../service/api-update-profile";
 
 interface UpdateProfilePropType {
   user : userStateType,
-  onCancel : any
+  onCancel : React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/**
+ * Renders form to update user profile
+ * Uses optimistic UI rendering 
+ * Called in profile page
+ * @param onCancel : manipulates a hook from parent component
+ * @returns form
+ */
 export const UpdateProfile: React.FC<UpdateProfilePropType> = ({ user, onCancel }) : JSX.Element => {
 
     const [currentFirstName, setFirstName] = useState(user.firstName);
@@ -26,10 +33,10 @@ export const UpdateProfile: React.FC<UpdateProfilePropType> = ({ user, onCancel 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // optimistic UI render
-        // redux store updated before call
+        // optimistic UI rendering => updates redux store before API call
         dispatch(
-          updateProfileAction({firstName: currentFirstName, 
+          updateProfileAction({
+            firstName: currentFirstName, 
             lastName: currentLastName,
             email: userEmail, 
             id: userId})
@@ -38,8 +45,12 @@ export const UpdateProfile: React.FC<UpdateProfilePropType> = ({ user, onCancel 
         onCancel(false);
 
         try {
-          // make axios API call
-          updatePost(currentFirstName, currentLastName, accessToken);
+          // API call to update profile
+          updatePost(
+            currentFirstName, 
+            currentLastName, 
+            accessToken
+            );
         }
 
         catch (error) {
@@ -48,32 +59,32 @@ export const UpdateProfile: React.FC<UpdateProfilePropType> = ({ user, onCancel 
 
           // return the previous names in redux store
           dispatch(
-            updateProfileAction({firstName: previousFirstName, 
-            lastName: previousLastName,
-            email: userEmail, 
-            id: userId})
+            updateProfileAction({
+              firstName: previousFirstName, 
+              lastName: previousLastName,
+              email: userEmail, 
+              id: userId
+            })
           );
-
         }
     }
-
 
     return <form className="edit-form" onSubmit={handleSubmit}>
         <div>
             <input className="edit-input"
-            minLength={2}
-            type="text"
-            required
-            placeholder={currentFirstName} 
-            onChange={(e) => setFirstName(e.target.value)}>
+              minLength={2}
+              type="text"
+              required
+              placeholder={currentFirstName} 
+              onChange={(e) => setFirstName(e.target.value)}>
             </input>
 
             <input className="edit-input"
-            minLength={2} 
-            type="text" 
-            required 
-            placeholder={currentLastName} 
-            onChange={(e) => setLastName(e.target.value)}>
+              minLength={2} 
+              type="text" 
+              required 
+              placeholder={currentLastName} 
+              onChange={(e) => setLastName(e.target.value)}>
             </input>
         </div>
         <p className="error-msg" color="red">{errorMsg}</p>

@@ -1,8 +1,7 @@
 /**
- * @file Handles the API login call (POST method)
+ * @file Handles the API login call
  */
 import axios from "axios";
-import React from "react";
 
 const url = process.env.REACT_APP_SERVER_URL;
 const loginEndpoint = url + process.env.REACT_APP_API_LOGIN;
@@ -34,11 +33,17 @@ export const getUserInput = (userEmail: string, userPassword: string): getUserTy
     }
 }
 
-
-export const loginPost = async (email: string, password: string): Promise<LoginResponse> => {
+/**
+ * HTTP request to log the user in
+ * @param email 
+ * @param password 
+ * @param endpoint Api endpoint for request
+ * @returns Promise of object (token, message)
+ */
+export const loginPost = async (email: string, password: string, endpoint = loginEndpoint): Promise<LoginResponse> => {
     console.log("post : " + JSON.stringify(getUserInput(email, password)));
     return axios.post(
-        loginEndpoint, 
+        endpoint, 
         getUserInput(email, password),
         {
             headers: {'Content-Type': 'application/json'},

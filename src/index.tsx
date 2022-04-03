@@ -3,18 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux';
-import { rootReducers } from './reducers/';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
-import configureStore from './store/index'
+import { configureStore } from './store/index'
 
 const {store, persistor} = configureStore();
-
-/*const store = createStore(
-  rootReducers,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-);*/
 
 ReactDOM.render(
       <React.StrictMode>

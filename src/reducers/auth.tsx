@@ -1,9 +1,15 @@
 import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "../actions/types";
 
 interface authStateType {
-    isLogged: Boolean,
-    token: String | null,
-    message : String
+    isLogged: boolean,
+    token: string | null,
+    message : string
+}
+
+interface actionType {
+    type: string,
+    token: string | null,
+    message : string
 }
 
 const defaultState = {
@@ -18,7 +24,7 @@ const defaultState = {
  * @param action 
  * @returns {authStateType}
  */
-export const authReducer = (state: authStateType = defaultState, action: any): authStateType => {
+export const authReducer = (state: authStateType = defaultState, action: actionType): authStateType => {
     switch(action.type){
 
         case LOGIN_SUCCESS:
@@ -26,14 +32,14 @@ export const authReducer = (state: authStateType = defaultState, action: any): a
                 isLogged: true,
                 token: action.token,
                 message: action.message
-             };
+            };
              
         case LOGIN_FAIL :
             return {
                 isLogged: false,
                 token: null,
                 message: "Connexion failed"
-             };
+            };
         
         case LOGOUT:
             return {

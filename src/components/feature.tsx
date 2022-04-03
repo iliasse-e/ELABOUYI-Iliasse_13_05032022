@@ -1,11 +1,10 @@
-import React from "react";
 import chat from "../assets/img/icon-chat.png";
 import money from "../assets/img/icon-money.png";
 import security from "../assets/img/icon-security.png"
 
 /**
  * Builds the feature component
- * @returns 
+ * @returns feature static section
  */
 export const Feature = (): JSX.Element => {
 
