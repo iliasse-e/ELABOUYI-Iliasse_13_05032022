@@ -5,20 +5,19 @@ import { disconnectAction } from "../actions";
 import logo from "../assets/img/argentBankLogo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faSignOut } from '@fortawesome/free-solid-svg-icons'
+import { userStateType } from "../reducers/user";
 
-interface isLoggedType {
-  isLogged: boolean
-}
 
 /**
  * Navigation component
  * Called in App
+ * @param isLogged login state to get from store
+ * @param user user to get from store
  * @returns navigation bar
  */
-export const Navigation: React.FC<isLoggedType> = (isLogged) : JSX.Element => {
-  console.log(isLogged.isLogged)
+export const Navigation: React.FC<{isLogged: boolean, user: userStateType}> = ({isLogged, user}) : JSX.Element => {
 
-  const firstName: String = useSelector((state: RootStateOrAny) => state.user.firstName)
+  const firstName: string = user.firstName
   const dispatch = useDispatch();
 
     return <nav className="main-nav">
@@ -31,7 +30,7 @@ export const Navigation: React.FC<isLoggedType> = (isLogged) : JSX.Element => {
       <h1 className="sr-only">Argent Bank</h1>
     </Link>
     {
-    isLogged.isLogged ? 
+    isLogged ? 
     (
     <div>
     <Link className="main-nav-item" to="./profile">

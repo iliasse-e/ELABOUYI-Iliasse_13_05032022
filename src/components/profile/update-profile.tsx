@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { updateProfileAction } from "../../actions";
 import { userStateType } from "../../reducers/user";
-import { updatePost } from "../../service/api-update-profile";
+import { fetchUpdateProfile } from "../../service/api/api-update-profile";
 
 interface UpdateProfilePropType {
   user : userStateType,
@@ -13,6 +13,7 @@ interface UpdateProfilePropType {
  * Renders form to update user profile
  * Uses optimistic UI rendering 
  * Called in profile page
+ * @param user current user
  * @param onCancel : manipulates a hook from parent component
  * @returns form
  */
@@ -46,7 +47,7 @@ export const UpdateProfile: React.FC<UpdateProfilePropType> = ({ user, onCancel 
 
         try {
           // API call to update profile
-          updatePost(
+          fetchUpdateProfile(
             currentFirstName, 
             currentLastName, 
             accessToken
@@ -57,7 +58,7 @@ export const UpdateProfile: React.FC<UpdateProfilePropType> = ({ user, onCancel 
           // renders error msg
           setErrorMsg("We could not update your profile :" + error.response.data.message + ", please try again");
 
-          // return the previous names in redux store
+          // returns back the previous names in redux store
           dispatch(
             updateProfileAction({
               firstName: previousFirstName, 

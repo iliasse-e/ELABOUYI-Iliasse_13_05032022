@@ -3,19 +3,22 @@ import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "../actions/types";
 interface authStateType {
     isLogged: boolean,
     token: string | null,
-    message : string
+    message : string,
+    remember: boolean
 }
 
 interface actionType {
     type: string,
     token: string | null,
-    message : string
+    message : string,
+    remember: boolean
 }
 
 const defaultState = {
     isLogged: false,
     token: null,
-    message: "Not connected"
+    message: "Not connected",
+    remember: false
 }
 
 /**
@@ -31,21 +34,24 @@ export const authReducer = (state: authStateType = defaultState, action: actionT
             return {
                 isLogged: true,
                 token: action.token,
-                message: action.message
+                message: action.message,
+                remember: action.remember
             };
              
         case LOGIN_FAIL :
             return {
                 isLogged: false,
                 token: null,
-                message: "Connexion failed"
+                message: "Connexion failed",
+                remember: false
             };
         
         case LOGOUT:
             return {
                 isLogged: false,
-                token: action.token,
-                message: action.message
+                token: null,
+                message: action.message,
+                remember: false
             };
 
         default :

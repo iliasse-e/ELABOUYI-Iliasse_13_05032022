@@ -2,11 +2,23 @@ import chat from "../assets/img/icon-chat.png";
 import money from "../assets/img/icon-money.png";
 import security from "../assets/img/icon-security.png"
 
+interface FeaturePropType {
+  money?: string,
+  chat?: string,
+  security?: string
+}
+
+const defaultProps = {
+  chat: chat, 
+  money: money, 
+  security: security
+}
+
 /**
  * Builds the feature component
  * @returns feature static section
  */
-export const Feature = (): JSX.Element => {
+const Feature: React.FC<FeaturePropType> = ({chat, money, security}): JSX.Element => {
 
     return <section className="features">
     <h2 className="sr-only">Features</h2>
@@ -43,3 +55,7 @@ export const Feature = (): JSX.Element => {
     </div>
   </section>
 }
+
+Feature.defaultProps = defaultProps
+
+export default Feature

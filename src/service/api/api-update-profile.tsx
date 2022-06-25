@@ -12,15 +12,14 @@ const url = process.env.REACT_APP_SERVER_URL;
 const userEndpoint = url + process.env.REACT_APP_API_PROFILE;
 
 /**
- * Make the Http request to update user profile (firstname & lastname)
- * Token needed for authentification
+ * Http request to update user profile (firstname & lastname)
  * @param firstName 
  * @param lastName 
  * @param token 
  * @param endpoint 
  * @returns Promise (object of new firstname and lastname)
  */
-export const updatePost = (firstName: string, lastName: string, token: string, endpoint: string = userEndpoint): Promise<ProfileType> => {
+export const fetchUpdateProfile = (firstName: string, lastName: string, token: string, endpoint: string = userEndpoint): Promise<ProfileType> => {
     return axios.put(
         endpoint,
         {

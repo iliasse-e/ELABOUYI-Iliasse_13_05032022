@@ -1,5 +1,5 @@
 import { Banner } from "../components/banner";
-import { Feature } from "../components/feature";
+import Feature from "../components/feature";
 
 /**
  * Sets and displays home page
@@ -7,8 +7,8 @@ import { Feature } from "../components/feature";
  * @returns home page
  */
 export const HomePage = () : JSX.Element => {
-    return <>
+    return <main>
         <Banner />
         <Feature />
-    </>
+    </main>
 }

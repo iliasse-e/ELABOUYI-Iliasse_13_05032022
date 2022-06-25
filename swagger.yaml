@@ -14,6 +14,12 @@ paths:
       - User Transactions
       summary: Returns all transactions of a selected month
       parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          schema: 
+            type: string
+          required: true
         - name: userAccountId
           in: path
           description: user account ID
@@ -48,6 +54,12 @@ paths:
       summary: Returns a specific transaction in details
       description: Gets data of single transaction details
       parameters:
+      - in: header
+        name: Authorization
+        description: Attach Bearer JWT token
+        schema: 
+            type: string
+        required: true
       - name: userAccountId
         in: path
         description: User's account ID
@@ -80,7 +92,13 @@ paths:
       - User Transactions
       summary: Update and retrns one transaction's data
       description: Modifies data of single transaction details
-      parameters:
+      parameters:        
+      - in: header
+        name: Authorization
+        description: Attach Bearer JWT token
+        schema: 
+          type: string
+        required: true
       - in: path
         name: userAccountId
         description: User's account ID
@@ -122,6 +140,12 @@ paths:
       summary: Deletes and returns transaction's data
       description: Deletes notes or category of a transaction
       parameters:
+      - in: header
+        name: Authorization
+        description: Attach Bearer JWT token
+        schema: 
+          type: string
+        required: true
       - in: path
         name: userAccountId
         description: User's account ID

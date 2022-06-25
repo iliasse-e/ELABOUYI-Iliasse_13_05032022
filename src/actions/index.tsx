@@ -5,11 +5,12 @@
 import { userStateType } from "../reducers/user"
 import { IS_LOGGED, LOGIN_SUCCESS, LOGOUT, SET_PROFILE } from "./types"
 
-export const connectAction = (message: string, token: string) => {
+export const connectAction = (message: string, token: string, remember: boolean) => {
     return {
         type: LOGIN_SUCCESS,
         message: message,
-        token: token
+        token: token,
+        remember: remember
     }
 }
 
@@ -17,7 +18,8 @@ export const disconnectAction = () => {
     return {
         type: LOGOUT,
         message: "You have been disconnected",
-        token: null
+        token: null,
+        remember: false
     }
 }
 
@@ -39,7 +41,7 @@ export const getUserAction = (user: userStateType) => {
  * @param updatedUser 
  * @returns updated user profile
  */
-export const updateProfileAction = (updatedUser : {firstName: string, lastName: string, email : string, id: string}) => {
+export const updateProfileAction = (updatedUser : userStateType) => {
     return {
         type: SET_PROFILE,
         updatedUser: updatedUser

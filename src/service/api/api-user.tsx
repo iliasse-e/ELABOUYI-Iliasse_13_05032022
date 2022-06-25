@@ -1,5 +1,5 @@
 /**
- * @file Handles the API user profile call
+ * @file Handles the API to get user
  */
 import axios from "axios";
 
@@ -21,12 +21,12 @@ export interface UserType {
 };
 
 /**
- * Sends token in order to get or update the profile
+ * Sends token in order to get user
  * @param token 
  * @param endpoint 
  * @returns {UserType} information on user
  */
-export const tokenPost = (token: string, endpoint: string = userEndpoint): Promise<UserType> => {
+export const fetchUser = (token: string, endpoint: string = userEndpoint): Promise<UserType> => {
     return axios.post(
         endpoint,
         token,

@@ -1,15 +1,12 @@
 /**
- * @file Handles the API login call
+ * @file Handles the API login
  */
 import axios from "axios";
 
+// getting environement variables
 const url = process.env.REACT_APP_SERVER_URL;
 const loginEndpoint = url + process.env.REACT_APP_API_LOGIN;
 
-interface getUserType {
-    email: string,
-    password: string
-}
 
 export interface LoginResponse {
     data: {
@@ -18,6 +15,29 @@ export interface LoginResponse {
         },
         message: string
     }
+}
+
+/**
+ * HTTP request to log the user in
+ * @param email 
+ * @param password 
+ * @param endpoint Api endpoint for request
+ * @returns Promise of object (token, message)
+ */
+ export const fetchLogin = async (email: string, password: string, endpoint = loginEndpoint): Promise<LoginResponse> => {
+    console.log("post : " + JSON.stringify(getUserInput(email, password)));
+    return axios.post(
+        endpoint, 
+        getUserInput(email, password),
+        {
+            headers: {'Content-Type': 'application/json'},
+        }
+        )
+}
+
+interface getUserType {
+    email: string,
+    password: string
 }
 
 /**
@@ -31,22 +51,4 @@ export const getUserInput = (userEmail: string, userPassword: string): getUserTy
         email: userEmail,
         password: userPassword
     }
-}
-
-/**
- * HTTP request to log the user in
- * @param email 
- * @param password 
- * @param endpoint Api endpoint for request
- * @returns Promise of object (token, message)
- */
-export const loginPost = async (email: string, password: string, endpoint = loginEndpoint): Promise<LoginResponse> => {
-    console.log("post : " + JSON.stringify(getUserInput(email, password)));
-    return axios.post(
-        endpoint, 
-        getUserInput(email, password),
-        {
-            headers: {'Content-Type': 'application/json'},
-        }
-        )
 }
